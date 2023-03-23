@@ -67,7 +67,8 @@ router.post('/reset/', (req, res) => {
 router.put('/:id', (req, res) => {
     const idToChangeStatus=req.params.id;
     const grocery=req.body
-    const queryText = `` //Add in QueryText here;
+    const queryText = `UPDATE "shoppingList" SET "purchased" = 'True' WHERE
+    "id" = $1;` //Add in QueryText here;
     pool.query(queryText, [idToChangeStatus])
         .then((result) => {
             console.log('Successfully changed item in database (PUT)', idToChangeStatus);
@@ -82,7 +83,7 @@ router.put('/:id', (req, res) => {
 //DELETE Route to the database (Remove an item).
 router.delete('/:id', (req, res) => {
     const idToDelete=req.params.id;
-    const queryText = `` //Add in QueryText here;
+    const queryText = `DELETE FROM "shoppingList" WHERE id=$1;` //Add in QueryText here;
     pool.query(queryText, [idToDelete])
         .then((result) => {
             console.log('Successfully removed item from database (DELETE)', idToDelete);
