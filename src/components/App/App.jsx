@@ -128,7 +128,7 @@ function App() {
                             <div class="groceryItem" key={item.id}>
                                 <p>{item.name}</p>
                                 <p>{item.qty} {item.unit}</p>
-                                {item.purchased ? null : <button class="buy" onClick={() => buyItem(item.id)}>Buy</button> }
+                                {item.purchased ? <button disabled={true} onClick={() => buyItem(item.id)}>Buy</button> : <button class="buy" onClick={() => buyItem(item.id)}>Buy</button> }
                                 <button class="delete" onClick={() => deleteItem(item.id)}>Remove</button>
                             </div>
                         ))}
