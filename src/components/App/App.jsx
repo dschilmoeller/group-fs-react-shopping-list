@@ -122,18 +122,16 @@ function App() {
                 <button onClick={clearList}>Delete All Items</button>
                 <p>Under Construction...</p>
                 <p>List Render Area:</p>
-                <table>
-                    <tbody>
+                    <div id="listContainer">
                         {itemlist.map(item => (
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
-                                <td>{item.qty} {item.unit}</td>
-                                <button onClick={buyItem}>Buy</button>
-                                <button onClick={deleteItem}>Remove</button>
-                            </tr>
+                            <div class="groceryItem" key={item.id}>
+                                <p>{item.name}</p>
+                                <p>{item.qty} {item.unit}</p>
+                                <button class="buy" onClick={buyItem}>Buy</button>
+                                <button class="delete" onClick={deleteItem}>Remove</button>
+                            </div>
                         ))}
-                    </tbody>
-                </table>
+                    </div>
             </main>
         </div>
     );
