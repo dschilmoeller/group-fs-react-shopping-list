@@ -71,8 +71,9 @@ function App() {
     const deleteItem = (deleteItemID) => {
         console.log(`In deleteItem working on ID#:`, deleteItemID);
 
-        axios.delete('/grocery/:id').then(response => {
+        axios.delete(`/grocery/${deleteItemID}`).then(response => {
             console.log(`Item with ID:`, deleteItemID, `deleted.`);
+            getItemList()
         })
             .catch(err => {
                 alert('error deleting item with ID:', deleteItemID);
@@ -82,9 +83,9 @@ function App() {
 
     const buyItem = (buyItemID) => {
         console.log(`In buyItem working on ID#:`, buyItemID);
-
-        axios.put('/itemList/:id').then(response => {
+        axios.put(`/grocery/${buyItemID}`).then(response => {
             console.log(`Item ID:`, buyItemID, 'marked as purchased');
+            getItemList()
         })
             .catch(err => {
                 alert('error in PUT Route in buyItem');
@@ -127,8 +128,8 @@ function App() {
                             <div class="groceryItem" key={item.id}>
                                 <p>{item.name}</p>
                                 <p>{item.qty} {item.unit}</p>
-                                <button class="buy" onClick={buyItem}>Buy</button>
-                                <button class="delete" onClick={deleteItem}>Remove</button>
+                                <button class="buy" onClick={() => buyItem(item.id)}>Buy</button>
+                                <button class="delete" onClick={() => deleteItem(item.id)}>Remove</button>
                             </div>
                         ))}
                     </div>
