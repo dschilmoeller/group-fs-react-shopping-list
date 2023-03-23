@@ -5,7 +5,7 @@ const pool = require('../modules/pool.js');
 
 //GET Route to the database (Get items in the database).
 router.get('/', (req, res) => {
-    const queryText = `SELET * FROM "shoppingList" ORDER BY "name"`;
+    const queryText = `SELECT * FROM "shoppingList" ORDER BY "name"`;
     pool.query(queryText)
         .then((result) => {
             console.log('Got things back from the Database (GET)', result.rows);
@@ -13,6 +13,22 @@ router.get('/', (req, res) => {
         })
         .catch((error) => {
             console.log(`Error making database query (GET) ${queryText}`, error)
+            res.sendStatus(500)
+        })
+});
+
+// POST Route to the database to add a new item)
+router.post('/', (req, res) => {
+    console.log(`req.body:`, req.body);
+    const grocery = req.body;
+    const queryText = `INSERT INTO "shoppingList" ("name", "qty", "unit", "purchased") VALUES ($1, $2, $3, $4)`;
+    pool.query(queryText, [grocery.name, grocery.qty, grocery.unit, grocery.purchased])
+        .then((result) => {
+            console.log('Added item to the database (POST)', grocery);
+            res.send(201)
+        })
+        .catch((error) => {
+            console.log(`Error making database query (POST) ${queryText}`, error)
             res.sendStatus(500)
         })
 });

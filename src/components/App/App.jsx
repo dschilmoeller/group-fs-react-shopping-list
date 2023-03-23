@@ -98,12 +98,12 @@ function App() {
         console.log(`In handleSubmit`);
         let newItem = {
             name: newItemName,
-            quantity: newItemQuantity,
+            qty: newItemQuantity,
             unit: newItemUnit,
             purchased: false
         }
         console.log(`NewItem:`, newItem);
-        // addItem(newItem)
+        addItem(newItem)
     }
 
     return (
