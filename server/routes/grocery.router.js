@@ -17,8 +17,8 @@ router.get('/', (req, res) => {
         })
 });
 
-//POST Route to the database (Add an item).
-router.post('/', (req, res) => {
+//POST Route to the database to clear items (Add an item).
+router.post('/clear/', (req, res) => {
     const grocery=req.body;
     const queryText = `` //Add in QueryText here;
     pool.query(queryText, [grocery.name, grocery.qty, grocery.unit, grocery.purchased])
@@ -31,6 +31,21 @@ router.post('/', (req, res) => {
             res.sendStatus(500)
         })
 });
+//POST Route to the database to reset items (Add an item).
+router.post('/reset/', (req, res) => {
+    const grocery=req.body;
+    const queryText = `` //Add in QueryText here;
+    pool.query(queryText, [grocery.name, grocery.qty, grocery.unit, grocery.purchased])
+        .then((result) => {
+            console.log('Added item to the database (POST)', grocery);
+            res.send(201)
+        })
+        .catch((error) => {
+            console.log(`Error making database query (POST) ${queryText}`, error)
+            res.sendStatus(500)
+        })
+});
+
 
 //PUT Route to the database (Add an item).
 router.put('/:id', (req, res) => {
@@ -49,7 +64,7 @@ router.put('/:id', (req, res) => {
 });
 
 //DELETE Route to the database (Remove an item).
-router.put('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const idToDelete=req.params.id;
     const queryText = `` //Add in QueryText here;
     pool.query(queryText, [idToDelete])
