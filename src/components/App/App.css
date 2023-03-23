@@ -2,3 +2,39 @@ main {
   width: 90%;
   margin: auto;
 }
+
+#listContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: center;
+
+}
+
+.groceryItem {
+  border: 1px solid;
+  padding: 1rem;
+  background-color: lightgray;
+  margin: 1rem;
+  border-radius: 10px;
+}
+
+p {
+  text-align: center;
+}
+
+button {
+  margin: .5rem;
+}
+
+.delete {
+  background-color: red;
+  color: white;
+  border-radius: 20%;
+}
+
+.buy {
+  background-color: aquamarine;
+  border-radius: 20%;
+}
+
