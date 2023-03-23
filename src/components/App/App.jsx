@@ -20,7 +20,7 @@ function App() {
         // console.log(`in getItemList`);
 
         // TODO: Confirm route
-        axios.get('/itemList').then(response => {
+        axios.get('/grocery').then(response => {
             console.log(`response: `, response.data);
             setItemList(response.data)
         })
@@ -31,7 +31,7 @@ function App() {
     const addItem = (newItem) => {
         console.log(`newItem:`, newItem);
 
-        axios.post('/itemList', newItem)
+        axios.post('/grocery', newItem)
             .then((response) => {
                 getItemList();
             })
@@ -43,7 +43,7 @@ function App() {
 
     const resetList = () => {
         console.log(`Resetting List...`);
-        axios.post('/itemList/reset')
+        axios.post('/grocery/reset')
         .then((response) => {
             console.log(`list reset`);
             getItemList();
@@ -56,7 +56,7 @@ function App() {
 
     const clearList = () => {
         console.log(`Clearing List...`);
-        axios.post('/itemList/clear')
+        axios.post('/grocery/clear')
             .then((response) => {
                 console.log(`list cleared`);
                 getItemList();
@@ -71,7 +71,7 @@ function App() {
     const deleteItem = (deleteItemID) => {
         console.log(`In deleteItem working on ID#:`, deleteItemID);
 
-        axios.delete('/itemList/:id').then(response => {
+        axios.delete('/grocery/:id').then(response => {
             console.log(`Item with ID:`, deleteItemID, `deleted.`);
         })
             .catch(err => {
@@ -96,13 +96,14 @@ function App() {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(`In handleSubmit`);
-        newItem = {
+        let newItem = {
             name: newItemName,
             quantity: newItemQuantity,
             unit: newItemUnit,
             purchased: false
         }
-        addItem(newItem)
+        console.log(`NewItem:`, newItem);
+        // addItem(newItem)
     }
 
     return (
@@ -111,9 +112,9 @@ function App() {
             <Header />
             <h1>Add an Item</h1>
             <form onSubmit={handleSubmit}>
-                Item Name: <input onChange={(event) => setNewItemName(event.target.value)} value = {newItemName}></input>
-                Quantity: <input onChange={(event) => setNewItemQuantity(event.target.value)} value = {newItemQuantity}></input>
-                Unit: <input onChange={(event) => setNewItemUnit(event.target.value)} value = {newItemUnit}></input>
+                Item Name: <input onChange={(event) => setNewItemName(event.target.value)} value={newItemName}></input>
+                Quantity: <input onChange={(event) => setNewItemQuantity(event.target.value)} value={newItemQuantity}></input>
+                Unit: <input onChange={(event) => setNewItemUnit(event.target.value)} value={newItemUnit}></input>
                 <button type="submit">Add Item</button>
             </form>
             <main>
@@ -127,8 +128,8 @@ function App() {
                             <tr key={item.id}>
                                 <td>{item.name}</td>
                                 <td>{item.qty} {item.unit}</td>
-                                <button>Buy</button>
-                                <button>Remove</button>
+                                <button onClick={buyItem}>Buy</button>
+                                <button onClick={deleteItem}>Remove</button>
                             </tr>
                         ))}
                     </tbody>
