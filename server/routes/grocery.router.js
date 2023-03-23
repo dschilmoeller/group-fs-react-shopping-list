@@ -36,10 +36,10 @@ router.post('/', (req, res) => {
 //POST Route to the database to clear items (Add an item).
 router.post('/clear/', (req, res) => {
     const grocery=req.body;
-    const queryText = ` DELETE FROM "shoppingList";`
-    pool.query(queryText, [grocery.name, grocery.qty, grocery.unit, grocery.purchased])
+    const queryText = `DELETE FROM "shoppingList";`
+    pool.query(queryText)
         .then((result) => {
-            console.log('Added item to the database (POST)', grocery);
+            console.log('Deleted all items from list', grocery);
             res.send(201)
         })
         .catch((error) => {
@@ -51,9 +51,9 @@ router.post('/clear/', (req, res) => {
 router.post('/reset/', (req, res) => {
     const grocery=req.body;
     const queryText = `UPDATE "shoppingList" SET "purchased" = 'False';` 
-    pool.query(queryText, [grocery.name, grocery.qty, grocery.unit, grocery.purchased])
+    pool.query(queryText)
         .then((result) => {
-            console.log('Added item to the database (POST)', grocery);
+            console.log('RESET all groceries to unbought', grocery);
             res.send(201)
         })
         .catch((error) => {
