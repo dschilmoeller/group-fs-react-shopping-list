@@ -30,6 +30,7 @@ Two additional buttons allow for resetting all purchased items, and another allo
 ### Screenshot
 
 ![wireframe](wireframe.jpg)
+![image](IMG_5783.jpg)
 
 ### Database Setup
 Simply create a DB named 'fs-react-shopping' and run the attached commands in database.sql in the SQL interface of your choice. The list has some sample items included, these can be discarded or modified at the users convenience.
