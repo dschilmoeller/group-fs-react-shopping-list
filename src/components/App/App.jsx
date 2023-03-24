@@ -105,6 +105,9 @@ function App() {
         }
         console.log(`NewItem:`, newItem);
         addItem(newItem)
+        setNewItemName('')
+        setNewItemQuantity(0)
+        setNewItemUnit('')
     }
 
     return (
@@ -139,3 +142,4 @@ function App() {
 }
 
 export default App;
+d

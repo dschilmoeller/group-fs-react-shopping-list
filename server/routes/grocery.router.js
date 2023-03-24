@@ -5,7 +5,7 @@ const pool = require('../modules/pool.js');
 
 //GET Route to the database (Get items in the database).
 router.get('/', (req, res) => {
-    const queryText = `SELECT * FROM "shoppingList" ORDER BY "name"`;
+    const queryText = `SELECT * FROM "shoppingList" ORDER BY "name", "purchased"`;
     pool.query(queryText)
         .then((result) => {
             console.log('Got things back from the Database (GET)', result.rows);
